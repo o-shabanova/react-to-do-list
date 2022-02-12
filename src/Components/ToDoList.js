@@ -8,7 +8,6 @@ export class ToDoList extends React.Component {
        this.onItemChanged = this.onItemChanged.bind(this);
    }
     onItemChanged(item) {
-       console.log("ToDo", item);
         this.props.onItemChanged(item);
     }
 

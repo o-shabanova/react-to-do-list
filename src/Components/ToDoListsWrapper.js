@@ -7,14 +7,13 @@ export class ToDoListsWrapper extends React.Component {
         this.onItemChanged = this.onItemChanged.bind(this);
     }
 
-    onItemChanged(data) {
-        console.log("ToDoWrapper component", data);
-        this.props.onItemChanged(data);
+    onItemChanged(item) {
+        this.props.onItemChanged(item);
     }
     render() {
         return (
             <div>
-                {this.props.items.map(item => <ToDoList {...item} onItemChanged={this.onItemChanged}/>)}
+                {this.props.lists.map(list => <ToDoList {...list} onItemChanged={this.onItemChanged}/>)}
             </div>
         )
     }

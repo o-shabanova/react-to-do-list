@@ -8,7 +8,6 @@ export class CheckList extends React.Component {
    }
 
     onItemChanged(item) {
-       console.log("CheckList component", item);
         this.props.onItemChanged(item);
     }
 

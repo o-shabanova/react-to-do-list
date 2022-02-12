@@ -8,7 +8,7 @@ constructor(props) {
 }
 
 onChange() {
-    console.log("CheckItem", this.props.item);
+    console.log("item: ", this.props.item)
     this.props.onItemChanged(this.props.item);
 }
 
