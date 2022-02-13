@@ -24,6 +24,25 @@ const defaultData = [
             index: 2,
             listIndex: 0
         }]
+    }, {
+        title: "Angular",
+        listIndex: 1,
+        items: [{
+            label: "New 1",
+            checked: true,
+            index: 0,
+            listIndex: 1
+        }, {
+            label: "New 2",
+            checked: false,
+            index: 1,
+            listIndex: 1
+        }, {
+            label: "New 3",
+            checked: false,
+            index: 2,
+            listIndex: 1
+        }]
     }
 ]
 
@@ -55,7 +74,7 @@ export default class App extends React.Component {
 
 
         this.setState({
-            data: [...newArray, list]
+            data: [...newArray, list].sort((a, b) => a.listIndex - b.listIndex)
         })
     }
 

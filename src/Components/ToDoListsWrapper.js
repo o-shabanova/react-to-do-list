@@ -13,7 +13,7 @@ export class ToDoListsWrapper extends React.Component {
     render() {
         return (
             <div>
-                {this.props.lists.map(list => <ToDoList {...list} onItemChanged={this.onItemChanged}/>)}
+                {this.props.lists.map(list => <ToDoList {...list}  onItemChanged={this.onItemChanged}/>)}
             </div>
         )
     }

@@ -2,15 +2,14 @@ import React from "react";
 import {CheckItem} from "./CheckItem";
 
 export class CheckList extends React.Component {
-   constructor(props) {
-       super(props);
-       this.onItemChanged = this.onItemChanged.bind(this);
-   }
+    constructor(props) {
+        super(props);
+        this.onItemChanged = this.onItemChanged.bind(this);
+    }
 
     onItemChanged(item) {
         this.props.onItemChanged(item);
     }
-
 
 
     render() {
@@ -18,6 +17,7 @@ export class CheckList extends React.Component {
             <div>
                 {this.props.items.map(item => <CheckItem item={item} onItemChanged={this.onItemChanged}/>)}
             </div>
+
         )
     }
 }
