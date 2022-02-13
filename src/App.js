@@ -53,6 +53,7 @@ export default class App extends React.Component {
             data: defaultData
         };
         this.onItemChanged = this.onItemChanged.bind(this);
+        this.onItemAdded = this.onItemAdded.bind(this);
     }
 
     onItemChanged(changedItem) {
@@ -78,6 +79,20 @@ export default class App extends React.Component {
         })
     }
 
+    onItemAdded(newItem) {
+        console.log(newItem);
+        const list = this.state.data.find(item => item.listIndex === newItem.listIndex);
+        const newList = {
+            ...list,
+            items: [...list.items, newItem]
+        }
+        const newArray = this.state.data.filter(item => item.listIndex !== newItem.listIndex);
+
+        this.setState({
+            data: [...newArray, newList].sort((a, b) => a.listIndex - b.listIndex)
+        })
+    }
+
 
     render() {
         return (
@@ -88,7 +103,8 @@ export default class App extends React.Component {
                     </Container>
                 </Navbar>
                 <Container>
-                    <ToDoListsWrapper lists={this.state.data} onItemChanged={this.onItemChanged}/>
+                    <ToDoListsWrapper lists={this.state.data} onItemAdded={this.onItemAdded}
+                                      onItemChanged={this.onItemChanged}/>
                 </Container>
                 <Footer todoListsCount={this.state.data.length}/>
             </>
