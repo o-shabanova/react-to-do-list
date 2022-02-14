@@ -6,6 +6,7 @@ export class ToDoListsWrapper extends React.Component {
         super(props);
         this.onItemChanged = this.onItemChanged.bind(this);
         this.onItemAdded = this.onItemAdded.bind(this);
+        this.removeItem = this.removeItem.bind(this);
     }
 
     onItemChanged(item) {
@@ -16,10 +17,14 @@ export class ToDoListsWrapper extends React.Component {
         this.props.onItemAdded(newItem);
     }
 
+    removeItem(item) {
+        this.props.removeItem(item);
+    }
+
     render() {
         return (
             <div>
-                {this.props.lists.map(list => <ToDoList {...list}  onItemAdded={this.onItemAdded} onItemChanged={this.onItemChanged}/>)}
+                {this.props.lists.map(list => <ToDoList {...list}  onItemAdded={this.onItemAdded} onItemChanged={this.onItemChanged} removeItem={this.removeItem}/>)}
             </div>
         )
     }

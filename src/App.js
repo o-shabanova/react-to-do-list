@@ -54,6 +54,7 @@ export default class App extends React.Component {
         };
         this.onItemChanged = this.onItemChanged.bind(this);
         this.onItemAdded = this.onItemAdded.bind(this);
+        this.removeItem = this.removeItem.bind(this);
     }
 
     onItemChanged(changedItem) {
@@ -93,6 +94,27 @@ export default class App extends React.Component {
         })
     }
 
+    removeItem(removedItem) {
+        console.log(removedItem);
+
+        const changedList = this.state.data.find(item => removedItem.listIndex === item.listIndex);
+        console.log("changedList:",  changedList);
+        const removedItems = changedList.items.filter(item => item.label !== removedItem.label );
+
+        const list = {
+            ...changedList,
+            items: removedItems
+        };
+
+        const newArray = this.state.data.filter(item => item.listIndex !== changedList.listIndex);
+        this.setState({
+            data: [...newArray, list].sort((a,b) => a.listIndex - b.listIndex)
+        })
+
+
+
+    }
+
 
     render() {
         return (
@@ -104,7 +126,7 @@ export default class App extends React.Component {
                 </Navbar>
                 <Container>
                     <ToDoListsWrapper lists={this.state.data} onItemAdded={this.onItemAdded}
-                                      onItemChanged={this.onItemChanged}/>
+                                      onItemChanged={this.onItemChanged} removeItem={this.removeItem}/>
                 </Container>
                 <Footer todoListsCount={this.state.data.length}/>
             </>

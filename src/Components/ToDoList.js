@@ -12,6 +12,7 @@ export class ToDoList extends React.Component {
         this.updateValue = this.updateValue.bind(this);
         this.onItemChanged = this.onItemChanged.bind(this);
         this.onItemAdded = this.onItemAdded.bind(this);
+        this.removeItem = this.removeItem.bind(this);
 
     }
 
@@ -19,6 +20,10 @@ export class ToDoList extends React.Component {
 
     onItemChanged(item) {
         this.props.onItemChanged(item);
+    }
+
+    removeItem(item) {
+        this.props.removeItem(item);
     }
 
     onItemAdded() {
@@ -43,7 +48,7 @@ export class ToDoList extends React.Component {
                 <Card style={{width: '18rem'}}>
                     <Card.Body>
                         <Card.Title>{this.props.title}</Card.Title>
-                        <CheckList items={this.props.items} onItemChanged={this.onItemChanged}/>
+                        <CheckList items={this.props.items} onItemChanged={this.onItemChanged} removeItem={this.removeItem}/>
                         <input type="text" value={this.state.value} onChange={this.updateValue}/>
                         <Button variant="primary" onClick={this.onItemAdded}>Add</Button>
                         <p>Progress: {checkedItems}/ {this.props.items.length}</p>
