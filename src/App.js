@@ -117,12 +117,12 @@ export default class App extends React.Component {
     allChecked(allCheckedItemsListIndex) {
         console.log(allCheckedItemsListIndex);
         const changedList = this.state.data.find(item => allCheckedItemsListIndex === item.listIndex);
-        const allChecked = changedList.items.map(item => item.checked = true);
+        const allChecked = changedList.items.map(item => {item.checked = true; return item});
         const list = {
             ...changedList,
             items: allChecked
         };
-        const newArray = this.state.data.filter(item => allCheckedItemsListIndex !== item.checked);
+        const newArray = this.state.data.filter(item => allCheckedItemsListIndex !== item.listIndex);
         this.setState({
             data: [...newArray, list].sort((a,b) => a.listIndex - b.listIndex)
         })
