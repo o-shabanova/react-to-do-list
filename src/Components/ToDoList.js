@@ -14,6 +14,7 @@ export class ToDoList extends React.Component {
         this.onItemAdded = this.onItemAdded.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.allChecked = this.allChecked.bind(this);
+        this.deleteAllItems = this.deleteAllItems.bind(this);
 
     }
 
@@ -45,6 +46,10 @@ export class ToDoList extends React.Component {
         this.props.allChecked(this.props.listIndex);
     }
 
+    deleteAllItems() {
+        this.props.deleteAllItems(this.props.listIndex);
+    }
+
     render() {
         const checkedItems = this.props.items.filter(item => item.checked).length;
 
@@ -53,8 +58,13 @@ export class ToDoList extends React.Component {
                 <Card style={{width: '18rem'}}>
                     <Card.Body>
                         <Card.Title>{this.props.title}</Card.Title>
-                        <CheckList items={this.props.items} onItemChanged={this.onItemChanged}
-                                   removeItem={this.removeItem} allChecked={this.allChecked}/>
+                        <CheckList items={this.props.items}
+                                   onItemChanged={this.onItemChanged}
+                                   removeItem={this.removeItem}
+                                   allChecked={this.allChecked}
+                                   deleteAllItems={this.deleteAllItems}
+
+                        />
                         <br/>
                         <input type="text" value={this.state.value} onChange={this.updateValue}/>
                         <Button variant="primary" onClick={this.onItemAdded}>Add</Button>

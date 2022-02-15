@@ -8,6 +8,8 @@ export class CheckList extends React.Component {
         this.onItemChanged = this.onItemChanged.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.allChecked = this.allChecked.bind(this);
+        this.deleteAllItems = this.deleteAllItems.bind(this);
+
     }
 
     onItemChanged(item) {
@@ -21,12 +23,16 @@ export class CheckList extends React.Component {
         this.props.allChecked();
     }
 
+    deleteAllItems() {
+        this.props.deleteAllItems();
+    }
+
     render() {
         return (
             <div>
                 {this.props.items.map(item => <CheckItem item={item} onItemChanged={this.onItemChanged} removeItem={this.removeItem}/>)}
                 <Button onClick={this.allChecked}>All done</Button>
-                <Button>Delete all</Button>
+                <Button onClick={this.deleteAllItems}>Delete all</Button>
             </div>
 
         )
