@@ -1,5 +1,6 @@
 import React from "react";
 import {ToDoList} from "./ToDoList";
+import {Button} from "react-bootstrap";
 
 export class ToDoListsWrapper extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export class ToDoListsWrapper extends React.Component {
         this.allChecked = this.allChecked.bind(this);
         this.deleteAllItems = this.deleteAllItems.bind(this);
         this.deleteList = this.deleteList.bind(this);
+        this.deleteAllLists = this.deleteAllLists.bind(this);
     }
 
     onItemChanged(item) {
@@ -36,6 +38,10 @@ export class ToDoListsWrapper extends React.Component {
         this.props.deleteList(index);
     }
 
+    deleteAllLists() {
+        this.props.deleteAllLists();
+    }
+
     render() {
         return (
             <div>
@@ -46,6 +52,9 @@ export class ToDoListsWrapper extends React.Component {
                                                         deleteAllItems={this.deleteAllItems}
                                                         deleteList={this.deleteList}
                 />)}
+                <Button onClick={this.deleteAllLists}>Delete all lists</Button>
+                <br/>
+                <br/>
             </div>
         )
     }

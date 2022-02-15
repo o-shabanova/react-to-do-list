@@ -74,7 +74,7 @@ export class ToDoList extends React.Component {
 
                         />
                         <br/>
-                        <input type="text" value={this.state.value} onChange={this.updateValue}/>
+                        <input type="text" placeholder="New task name" value={this.state.value} onChange={this.updateValue}/>
                         <Button variant="primary" onClick={this.onItemAdded}>Add</Button>
                         <p>Progress: {checkedItems}/ {this.props.items.length}</p>
                     </Card.Body>

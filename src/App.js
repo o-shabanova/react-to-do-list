@@ -3,6 +3,7 @@ import './App.css';
 import {Container, Navbar} from "react-bootstrap";
 import {Footer} from "./Components/Footer";
 import {ToDoListsWrapper} from "./Components/ToDoListsWrapper";
+import {NewListCreation} from "./Components/NewListCreation";
 
 const defaultData = [
     {
@@ -46,6 +47,7 @@ const defaultData = [
     }
 ]
 
+
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -57,7 +59,10 @@ export default class App extends React.Component {
         this.removeItem = this.removeItem.bind(this);
         this.allChecked = this.allChecked.bind(this);
         this.deleteAllItems = this.deleteAllItems.bind(this);
+        this.addNewList = this.addNewList.bind(this);
         this.deleteList = this.deleteList.bind(this);
+        this.deleteAllLists = this.deleteAllLists.bind(this);
+
     }
 
     onItemChanged(changedItem) {
@@ -101,8 +106,8 @@ export default class App extends React.Component {
         console.log(removedItem);
 
         const changedList = this.state.data.find(item => removedItem.listIndex === item.listIndex);
-        console.log("changedList:",  changedList);
-        const removedItems = changedList.items.filter(item => item.label !== removedItem.label );
+        console.log("changedList:", changedList);
+        const removedItems = changedList.items.filter(item => item.label !== removedItem.label);
 
         const list = {
             ...changedList,
@@ -111,21 +116,24 @@ export default class App extends React.Component {
 
         const newArray = this.state.data.filter(item => item.listIndex !== changedList.listIndex);
         this.setState({
-            data: [...newArray, list].sort((a,b) => a.listIndex - b.listIndex)
+            data: [...newArray, list].sort((a, b) => a.listIndex - b.listIndex)
         })
     }
 
     allChecked(allCheckedItemsListIndex) {
         console.log(allCheckedItemsListIndex);
         const changedList = this.state.data.find(item => allCheckedItemsListIndex === item.listIndex);
-        const allChecked = changedList.items.map(item => {item.checked = true; return item});
+        const allChecked = changedList.items.map(item => {
+            item.checked = true;
+            return item
+        });
         const list = {
             ...changedList,
             items: allChecked
         };
         const newArray = this.state.data.filter(item => allCheckedItemsListIndex !== item.listIndex);
         this.setState({
-            data: [...newArray, list].sort((a,b) => a.listIndex - b.listIndex)
+            data: [...newArray, list].sort((a, b) => a.listIndex - b.listIndex)
         })
 
     }
@@ -139,7 +147,7 @@ export default class App extends React.Component {
         };
         const newArray = this.state.data.filter(item => allRemovedItemsListIndex !== item.listIndex);
         this.setState({
-            data: [...newArray, list].sort((a,b) => a.listIndex - b.listIndex)
+            data: [...newArray, list].sort((a, b) => a.listIndex - b.listIndex)
         })
     }
 
@@ -147,9 +155,28 @@ export default class App extends React.Component {
         console.log('indexList to delete:', indexList);
         const newArray = this.state.data.filter(item => indexList !== item.listIndex);
         this.setState({
-            data: [...newArray].sort((a,b) => a.listIndex - b.listIndex)
+            data: [...newArray].sort((a, b) => a.listIndex - b.listIndex)
         })
     }
+
+    addNewList(newListName) {
+        console.log("newList:", newListName);
+        const newList = {
+            title: newListName,
+            listIndex: this.state.data.length,
+            items: []
+        }
+        this.setState({
+            data: [...this.state.data, newList].sort((a, b) => a.listIndex - b.listIndex)
+        })
+    }
+
+    deleteAllLists() {
+        this.setState({
+            data: []
+        })
+    }
+
     render() {
         return (
             <>
@@ -159,14 +186,18 @@ export default class App extends React.Component {
                     </Container>
                 </Navbar>
                 <Container>
+                    <NewListCreation addNewList={this.addNewList} createNewListName={this.createNewListName}/>
+                    <br/>
                     <ToDoListsWrapper lists={this.state.data}
                                       onItemAdded={this.onItemAdded}
                                       onItemChanged={this.onItemChanged}
                                       removeItem={this.removeItem}
                                       allChecked={this.allChecked}
                                       deleteAllItems={this.deleteAllItems}
-                                      deleteList={this.deleteList}/>
+                                      deleteList={this.deleteList}
+                                      deleteAllLists={this.deleteAllLists}/>
                 </Container>
+                <br/>
                 <Footer todoListsCount={this.state.data.length}/>
             </>
         );
