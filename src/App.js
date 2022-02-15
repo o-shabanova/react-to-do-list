@@ -57,6 +57,7 @@ export default class App extends React.Component {
         this.removeItem = this.removeItem.bind(this);
         this.allChecked = this.allChecked.bind(this);
         this.deleteAllItems = this.deleteAllItems.bind(this);
+        this.deleteList = this.deleteList.bind(this);
     }
 
     onItemChanged(changedItem) {
@@ -140,10 +141,15 @@ export default class App extends React.Component {
         this.setState({
             data: [...newArray, list].sort((a,b) => a.listIndex - b.listIndex)
         })
-
     }
 
-
+    deleteList(indexList) {
+        console.log('indexList to delete:', indexList);
+        const newArray = this.state.data.filter(item => indexList !== item.listIndex);
+        this.setState({
+            data: [...newArray].sort((a,b) => a.listIndex - b.listIndex)
+        })
+    }
     render() {
         return (
             <>
@@ -159,7 +165,7 @@ export default class App extends React.Component {
                                       removeItem={this.removeItem}
                                       allChecked={this.allChecked}
                                       deleteAllItems={this.deleteAllItems}
-                    />
+                                      deleteList={this.deleteList}/>
                 </Container>
                 <Footer todoListsCount={this.state.data.length}/>
             </>

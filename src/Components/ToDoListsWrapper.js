@@ -9,6 +9,7 @@ export class ToDoListsWrapper extends React.Component {
         this.removeItem = this.removeItem.bind(this);
         this.allChecked = this.allChecked.bind(this);
         this.deleteAllItems = this.deleteAllItems.bind(this);
+        this.deleteList = this.deleteList.bind(this);
     }
 
     onItemChanged(item) {
@@ -31,6 +32,10 @@ export class ToDoListsWrapper extends React.Component {
         this.props.deleteAllItems(index);
     }
 
+    deleteList(index) {
+        this.props.deleteList(index);
+    }
+
     render() {
         return (
             <div>
@@ -39,6 +44,7 @@ export class ToDoListsWrapper extends React.Component {
                                                         removeItem={this.removeItem}
                                                         allChecked={this.allChecked}
                                                         deleteAllItems={this.deleteAllItems}
+                                                        deleteList={this.deleteList}
                 />)}
             </div>
         )

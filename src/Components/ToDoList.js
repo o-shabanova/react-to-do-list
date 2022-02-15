@@ -15,6 +15,7 @@ export class ToDoList extends React.Component {
         this.removeItem = this.removeItem.bind(this);
         this.allChecked = this.allChecked.bind(this);
         this.deleteAllItems = this.deleteAllItems.bind(this);
+        this.deleteList = this.deleteList.bind(this);
 
     }
 
@@ -50,6 +51,10 @@ export class ToDoList extends React.Component {
         this.props.deleteAllItems(this.props.listIndex);
     }
 
+    deleteList() {
+        this.props.deleteList(this.props.listIndex)
+    }
+
     render() {
         const checkedItems = this.props.items.filter(item => item.checked).length;
 
@@ -58,6 +63,9 @@ export class ToDoList extends React.Component {
                 <Card style={{width: '18rem'}}>
                     <Card.Body>
                         <Card.Title>{this.props.title}</Card.Title>
+                        <Button onClick={this.deleteList}>Delete list</Button>
+                        <br/>
+                        <br/>
                         <CheckList items={this.props.items}
                                    onItemChanged={this.onItemChanged}
                                    removeItem={this.removeItem}

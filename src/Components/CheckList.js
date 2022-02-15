@@ -30,7 +30,8 @@ export class CheckList extends React.Component {
     render() {
         return (
             <div>
-                {this.props.items.map(item => <CheckItem item={item} onItemChanged={this.onItemChanged} removeItem={this.removeItem}/>)}
+                {this.props.items.map(item => <CheckItem item={item} onItemChanged={this.onItemChanged}
+                                                         removeItem={this.removeItem}/>)}
                 <Button onClick={this.allChecked}>All done</Button>
                 <Button onClick={this.deleteAllItems}>Delete all</Button>
             </div>
